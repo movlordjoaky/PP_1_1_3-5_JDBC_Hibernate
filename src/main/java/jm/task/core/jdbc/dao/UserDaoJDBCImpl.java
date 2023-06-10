@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl implements UserDao, AutoCloseable {
+public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
     }
 
@@ -77,18 +77,6 @@ public class UserDaoJDBCImpl implements UserDao, AutoCloseable {
             statement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void close() {
-        try {
-            Util.getConnection().close();
-            if (Util.getConnection().isClosed()) {
-                System.out.println("Соединение с БД завершено");
-            }
-        } catch (Exception e) {
-            System.err.println("Ошибка закрытия БД");
         }
     }
 }

@@ -5,7 +5,7 @@ import jm.task.core.jdbc.model.User;
 
 import java.util.List;
 
-public class UserServiceImpl implements UserService, AutoCloseable {
+public class UserServiceImpl implements UserService {
     UserDaoJDBCImpl userDaoJDBC;
 
     public UserServiceImpl() {
@@ -34,10 +34,5 @@ public class UserServiceImpl implements UserService, AutoCloseable {
 
     public void cleanUsersTable() {
         userDaoJDBC.cleanUsersTable();
-    }
-
-    @Override
-    public void close() throws Exception {
-
     }
 }
