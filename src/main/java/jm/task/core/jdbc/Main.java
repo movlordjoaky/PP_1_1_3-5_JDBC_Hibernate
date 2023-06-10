@@ -11,7 +11,8 @@ public class Main {
         // реализуйте алгоритм здесь
         List<User> users;
 
-        try (UserServiceImpl userService = new UserServiceImpl()) {
+        try {
+            UserServiceImpl userService = new UserServiceImpl();
             userService.createUsersTable();
 
             userService.saveUser("Alexia", "Daugherty", (byte) 88);
@@ -30,6 +31,8 @@ public class Main {
             userService.cleanUsersTable();
 
             userService.dropUsersTable();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

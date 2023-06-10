@@ -24,5 +24,4 @@ public class Util {
         }
         return connection;
     }
-
 }
