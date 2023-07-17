@@ -19,7 +19,7 @@ public class UserDaoHibernateImpl implements UserDao {
         SessionFactory sessionFactory = Util.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String query = "create table IF NOT EXISTS users(id int auto_increment, name VARCHAR(100) not null, lastName varchar(100) not null, age tinyint not null, constraint id primary key (id));";
+        String query = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL , lastName VARCHAR(100) NOT NULL , age TINYINT NOT NULL , CONSTRAINT id PRIMARY KEY (id));";
         session.createSQLQuery(query).executeUpdate();
         transaction.commit();
         session.close();
@@ -30,7 +30,7 @@ public class UserDaoHibernateImpl implements UserDao {
         SessionFactory sessionFactory = Util.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String query = "drop table IF EXISTS users;";
+        String query = "DROP TABLE IF EXISTS users;";
         session.createSQLQuery(query).executeUpdate();
         transaction.commit();
         session.close();
@@ -56,7 +56,7 @@ public class UserDaoHibernateImpl implements UserDao {
         SessionFactory sessionFactory = Util.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String query = "delete from users where id = :id";
+        String query = "DELETE FROM users WHERE id = :id";
         session.createSQLQuery(query)
                 .setParameter("id", id)
                 .executeUpdate();
@@ -79,7 +79,7 @@ public class UserDaoHibernateImpl implements UserDao {
         SessionFactory sessionFactory = Util.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String query = "delete from users";
+        String query = "DELETE FROM users";
         session.createSQLQuery(query)
                 .executeUpdate();
         transaction.commit();
