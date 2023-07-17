@@ -5,13 +5,12 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public UserDaoHibernateImpl() {
         this.sessionFactory = Util.getSessionFactory();
@@ -71,8 +70,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public List<User> getAllUsers() {
         try (Session session = this.sessionFactory.openSession()) {
             TypedQuery<User> query = session.createQuery("FROM User", User.class);
-            List<User> list = query.getResultList();
-            return list;
+            return query.getResultList();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -82,7 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void cleanUsersTable() {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery("DELETE FROM users")
+            session.createSQLQuery("DELETE FROM users WHERE 1=1")
                     .executeUpdate();
             transaction.commit();
         } catch (Exception e) {
