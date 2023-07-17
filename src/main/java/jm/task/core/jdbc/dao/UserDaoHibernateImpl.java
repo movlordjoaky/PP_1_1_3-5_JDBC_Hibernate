@@ -21,8 +21,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void createUsersTable() {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            String query = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL , lastName VARCHAR(100) NOT NULL , age TINYINT NOT NULL , CONSTRAINT id PRIMARY KEY (id));";
-            session.createSQLQuery(query).executeUpdate();
+            session.createSQLQuery("CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL , lastName VARCHAR(100) NOT NULL , age TINYINT NOT NULL , CONSTRAINT id PRIMARY KEY (id));").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -33,8 +32,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void dropUsersTable() {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            String query = "DROP TABLE IF EXISTS users;";
-            session.createSQLQuery(query).executeUpdate();
+            session.createSQLQuery("DROP TABLE IF EXISTS users;").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -45,8 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            String query = "INSERT INTO users (name, lastName, age) VALUES (:name, :lastName, :age)";
-            session.createSQLQuery(query)
+            session.createSQLQuery("INSERT INTO users (name, lastName, age) VALUES (:name, :lastName, :age)")
                     .setParameter("name", name)
                     .setParameter("lastName", lastName)
                     .setParameter("age", age)
@@ -61,8 +58,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            String query = "DELETE FROM users WHERE id = :id";
-            session.createSQLQuery(query)
+            session.createSQLQuery("DELETE FROM users WHERE id = :id")
                     .setParameter("id", id)
                     .executeUpdate();
             transaction.commit();
@@ -86,8 +82,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void cleanUsersTable() {
         try (Session session = this.sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            String query = "DELETE FROM users";
-            session.createSQLQuery(query)
+            session.createSQLQuery("DELETE FROM users")
                     .executeUpdate();
             transaction.commit();
         } catch (Exception e) {
