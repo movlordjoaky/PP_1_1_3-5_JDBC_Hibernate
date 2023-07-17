@@ -14,7 +14,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
         String query = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, age TINYINT NOT NULL, CONSTRAINT id PRIMARY KEY (id));";
         try (Statement statement = Util.getConnection().createStatement()) {
-
             statement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,7 +71,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String query = "DELETE FROM users";
         try (Statement statement = Util.getConnection().createStatement()) {
-
             statement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);

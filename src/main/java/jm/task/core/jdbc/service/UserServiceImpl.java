@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     //    private UserDao userDaoJDBC;
-    private UserDao userDaoHibernate;
+    private final UserDao userDaoHibernate;
 
     public UserServiceImpl() {
         this.userDaoHibernate = new UserDaoHibernateImpl();
