@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -35,7 +36,6 @@ public class UserDaoHibernateImpl implements UserDao {
             String query = "DROP TABLE IF EXISTS users;";
             session.createSQLQuery(query).executeUpdate();
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -74,9 +74,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         try (Session session = this.sessionFactory.openSession()) {
-            Query query = session.createQuery("FROM User", User.class);
-            List<User> list = query.list();
-            session.close();
+            TypedQuery<User> query = session.createQuery("FROM User", User.class);
+            List<User> list = query.getResultList();
             return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -91,7 +90,6 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(query)
                     .executeUpdate();
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
